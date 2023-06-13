@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* Styles for the history sidebar */
+    .sidebar {
+      width: 300px;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      overflow-y: auto;
+      height: 400px;
+    }
+
+    .message {
+      margin-bottom: 10px;
+    }
+    
+    .history-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    
+    .slider {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .slide {
+      display: none;
+    }
+    
+    .active-slide {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <div class="slider" id="slider"></div>
+  </div>
+
+  <input type="text" id="user-input">
+  <button onclick="sendMessage()">Send</button>
+  <button onclick="startNewChat()">New Chat</button>
+
+  <script>
+    var chatHistories = {}; // Object to store multiple chat histories
+    var currentChatId = 0; // Current chat ID
+
+    function renderChatHistory(chatId) {
+      var slider = document.getElementById("slider");
+      slider.innerHTML = "";
+
+      var chatHistory = chatHistories[chatId];
+      
+      if (chatHistory) {
+        chatHistory.forEach(function (message) {
+          var messageElement = document.createElement("div");
+          messageElement.classList.add("message");
+          messageElement.textContent = message.user + ": " + message.message;
+
+          slider.appendChild(messageElement);
+        });
+      }
+      
+      var slideElements = document.getElementsByClassName("slide");
+      for (var i = 0; i < slideElements.length; i++) {
+        slideElements[i].classList.remove("active-slide");
+      }
+      
+      var activeSlide = document.getElementById("slide-" + chatId);
+      activeSlide.classList.add("active-slide");
+    }
+
+    function sendMessage() {
+      var userInput = document.getElementById("user-input").value;
+      
+      if (!chatHistories[currentChatId]) {
+        chatHistories[currentChatId] = [];
+      }
+      
+      chatHistories[currentChatId].push({ user: "User", message: userInput });
+      chatHistories[currentChatId].push({ user: "Model", message: "I received: " + userInput });
+
+      renderChatHistory(currentChatId);
+
+      document.getElementById("user-input").value = "";
+    }
+
+    function startNewChat() {
+      currentChatId++; // Increment chat ID to create a new history
+      chatHistories[currentChatId] = []; // Create an empty chat history array for the new chat
+      renderChatHistory(currentChatId);
+    }
+    
+    // Save the chat histories to localStorage
+    function saveChatHistories() {
+      localStorage.setItem("chatHistories", JSON.stringify(chatHistories));
+      localStorage.setItem("currentChatId", currentChatId);
+    }
+
+    // Load the chat histories from localStorage
+    function loadChatHistories() {
+      var savedChatHistories = localStorage.getItem("chatHistories");
+      var savedCurrentChatId = localStorage.getItem("currentChatId");
+      
+      if (savedChatHistories && savedCurrentChatId) {
+        chatHistories = JSON.parse(savedChatHistories);
+        currentChatId = parseInt(savedCurrentChatId);
+        renderChatHistory(currentChatId);
+      }
+    }
+
+    // Call the loadChatHistories function to load the chat histories on page load
+    loadChatHistories();
+    
+    // Save the chat histories on page unload
+    window.onunload = saveChatHistories;
+  </script>
+</body>
+</html>

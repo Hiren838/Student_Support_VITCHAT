@@ -1,0 +1,268 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#chatbot-container {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+
+#chatbot-header {
+    background-color: #2C3E50;
+    color: #fff;
+    padding: 10px;
+    border-color: white;
+}
+
+#chatbot-dialogue {
+    padding: 10px;
+    height: 472px;
+    background-color: ghostwhite;
+    overflow-y: scroll;
+}
+
+#chatbot-dialogue::-webkit-scrollbar {
+    width: 10px;
+}
+
+
+.message {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.message.received {
+    justify-content: flex-start;
+}
+
+.message.sent {
+    justify-content: flex-end;
+}
+
+.message p {
+    background-color: lightblue;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 0 10px;
+    max-width: 60%;
+}
+
+#chatbot-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    background-color: transparent;
+    color: white;
+}
+input:focus{
+    outline: none;
+}
+
+#chatbot-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+
+}
+
+#chatbot-input button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.form-check-label {
+    margin-left: 10px;
+}
+
+.form-check-input:focus~.form-check-label {
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.form-switch .form-check-input {
+    width: 1.5em;
+    height: 0.75em;
+}
+
+/* dark mode */
+
+body.light-mode {
+    background-color: #fff;
+    color: #000;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+#chatbot-container.light-mode {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#chatbot-container.dark-mode {
+    border: 1px solid #333;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+#chatbot-header.light-mode {
+    background-color: #2C3E50;
+    color: #fff;
+    padding: 10px;
+    border-color: white;
+}
+
+#chatbot-header.dark-mode {
+    background-color: #222;
+    color: #fff;
+    padding: 10px;
+    border-color: white;
+}
+
+#chatbot-dialogue.light-mode {
+    padding: 10px;
+    height: 472px;
+    background-color: ghostwhite;
+    overflow-y: scroll;
+}
+
+#chatbot-dialogue.dark-mode {
+    padding: 10px;
+    height: 472px;
+    background-color: #4c5265;
+    color: #fff;
+    overflow-y: scroll;
+}
+
+#history.light-mode {
+    background-color: ghostwhite;
+}
+
+#history.dark-mode {
+
+    background-color: #3d3e51;
+    color: #fff;
+}
+
+#horizontal {
+    color: black;
+}
+
+#horizontal.dark-mode {
+    color: white;
+}
+
+.message.light-mode {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.message.received.light-mode {
+    justify-content: flex-start;
+}
+
+.message.sent.light-mode {
+    justify-content: flex-end;
+}
+
+.message.dark-mode {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.message.received.dark-mode {
+    justify-content: flex-start;
+}
+
+.message.sent.dark-mode {
+    justify-content: flex-end;
+}
+
+.message p.light-mode {
+    background-color: lightblue;
+}
+
+#chatbot-send-button.dark-mode {
+    background-color: plum;
+}
+
+#clear-chat-button.dark-mode {
+    background-color: plum;
+}
+
+
+/* Loder */
+
+/* Spinner styles */
+.spinner {
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    width: 60px;
+    height: 40px;
+    position: relative;
+    background-color: pink;
+}
+
+.spinner div {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background-color: black;
+    border-radius: 50%;
+    animation: spinner 1.2s linear infinite;
+}
+
+.spinner div:nth-child(1) {
+    animation-delay: 0s;
+    top: 15px;
+    left: 5px;
+}
+
+.spinner div:nth-child(2) {
+    animation-delay: -0.4s;
+    top: 15px;
+    left: 20px;
+}
+
+.spinner div:nth-child(3) {
+    animation-delay: -0.8s;
+    top: 15px;
+    left: 35px;
+}
+
+@keyframes spinner {
+    0% {
+        transform: scale(0);
+    }
+
+    50% {
+        opacity: 20;
+    }
+
+    100% {
+        transform: scale(1);
+        opacity: 10;    
+    }
+}
